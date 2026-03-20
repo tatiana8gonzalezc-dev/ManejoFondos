@@ -1,0 +1,73 @@
+<section class="bg-banking min-h-[90vh] p-6 text-center">
+  <div class="max-w-3xl mx-auto bg-[#9FA8DA] shadow-lg rounded-xl p-6">
+    <div class="">
+      <div class="border-b border-gray-500 pb-2">
+        <p class="text-gray-800 font-bold text-[18px] text-center">RESUMEN</p>
+      </div>
+      <p class="text-gray-800 font-bold text-[18px] text-center pt-8">SALDO DISPONIBLE: <span
+          class="text-green-600 font-semibold">COP ${{infoUser?.balance}}</span></p>
+
+        <!--Botones para redirigir a fondos o historial-->
+      <div class="flex gap-4 mt-4 justify-center">
+        <button class="bg-[#5C6BC0] text-white px-6 py-2 rounded-lg hover:bg-[#3f51b5] transition" (click)="redirect('/funds')"> Ver Fondos </button>
+        <button class="bg-[#5C6BC0] text-white px-6 py-2 rounded-lg hover:bg-[#3f51b5] transition" (click)="redirect('/record')"> Ver Historial</button>
+      </div>
+    </div>
+
+    <!--Tabla o informacion de los fondos suscritos-->
+    <div class="mt-6">
+      <h2 *ngIf="infoUser?.subscribedFunds?.length > 0" class="text-xl font-bold mb-4 text-center text-gray-800">
+        MIS FONDOS
+      </h2>
+
+      <div *ngIf="infoUser?.subscribedFunds?.length > 0; else noFunds">
+
+        <table class="w-full max-w-2xl mx-auto border border-gray-300 rounded-lg overflow-hidden text-xs sm:text-sm">
+
+          <thead class="bg-gray-200">
+            <tr>
+              <th class="text-left px-2 py-1 sm:px-4 sm:py-2 border-r border-gray-300">Fondo</th>
+              <th class="text-left px-2 py-1 sm:px-4 sm:py-2 border-r border-gray-300">Monto</th>
+              <th class="text-center px-2 py-1 sm:px-4 sm:py-2">Detalle</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="bg-white hover:bg-gray-100" *ngFor="let fund of infoUser?.subscribedFunds">
+
+              <td class="px-2 py-1 sm:px-4 sm:py-2 truncate max-w-[100px] sm:max-w-none border-t border-r border-gray-300">
+                {{ fund.name }}
+              </td>
+
+              <td class="px-2 py-1 sm:px-4 sm:py-2 border-t border-r border-gray-300">
+                ${{ fund.amount }}
+              </td>
+
+              <td class="px-2 py-1 sm:px-4 sm:py-2 text-center border-t">
+                <button class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 transition"
+                  (click)="openModal(fund)">
+                  Ver
+                </button>
+              </td>
+
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <!--visual cuando no hay datos-->
+      <ng-template #noFunds>
+        <div class="text-center mt-6 text-gray-600">
+          <p class="text-lg font-semibold">No tienes fondos suscritos</p>
+          <p class="text-sm mt-2">Empieza invirtiendo en un fondo disponible</p>
+        </div>
+      </ng-template>
+
+    </div>
+  </div>
+  <!-- Mostrar modal solo si hay fondo seleccionado -->
+  <app-fund-detail-modal-component *ngIf="selectedFund" [fund]="selectedFund" (clickOutside)="closeModal()">
+  </app-fund-detail-modal-component>
+</section>

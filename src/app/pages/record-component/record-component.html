@@ -1,0 +1,24 @@
+<section class="bg-banking min-h-[90vh] p-6">
+  <div class="max-w-5xl mx-auto grid gap-6 grid-cols-1">
+    <!--Visual historial-->
+    <div *ngIf="records?.transactions?.length > 0; else noTransactions">
+      <div *ngFor="let tx of records?.transactions" class="bg-[#9FA8DA] shadow-lg rounded-xl p-6 mt-4">
+        <h3 class="text-xl font-bold mb-2 text-gray-800 break-words">{{ tx.fundName }}</h3>
+        <p class="text-gray-700">Monto invertido: <span class="font-semibold"> ${{ tx.amount }}</span></p>
+        <p class="text-gray-700">{{ tx.type }}</p>
+      </div>
+    </div>
+    <!--Visual cuando no hay historial-->
+    <ng-template #noTransactions>
+      <div class="text-center mt-10 text-gray-600 bg-[#9FA8DA] shadow-lg rounded-xl p-6 mt-4">
+        <p class="text-lg font-semibold">
+          No hay movimientos registrados
+        </p>
+        <p class="text-sm mt-1">
+          Aquí verás el historial de tus transacciones
+        </p>
+      </div>
+    </ng-template>
+
+  </div>
+</section>

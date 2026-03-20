@@ -1,0 +1,22 @@
+<section class="bg-banking min-h-[90vh] p-6">
+  <div class="max-w-5xl mx-auto grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    
+    <!-- Cards con la informacion de los fondos-->
+    <div class="bg-white shadow-lg rounded-xl p-6 mt-4" *ngFor="let fund of funds?.funds">
+      <h3 class="text-xl font-bold mb-2 text-gray-800 break-words">{{fund.name}}</h3>
+      <p class="text-gray-700">Monto: <span class="font-semibold">${{fund.amount}}</span></p>
+      <p class="text-gray-700">Categoría: {{fund.type}}</p>
+      <button (click)="openSubscribe(fund)" class="bg-[#5C6BC0] text-white px-6 py-2 rounded-lg hover:bg-[#3f51b5] transition mt-4">
+        Suscribirse
+      </button>
+    </div>
+   
+    </div>
+
+    <!--Popup para suscribirse-->
+    <app-modal-subscription-component
+    *ngIf="openDetail" 
+    [openDetail]="openDetail"
+    (clickClose)="closeModal()">
+    </app-modal-subscription-component>
+</section>

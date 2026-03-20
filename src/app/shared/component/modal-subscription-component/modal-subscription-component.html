@@ -1,0 +1,56 @@
+<div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl shadow-lg p-6 max-w-md w-full relative">
+
+        <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-800" (click)="close()">✕</button>
+
+        <div class="flex flex-col text-left">
+            <h2 class="text-xl font-bold mb-2 border-b border-gray-500 pb-4">Subscribirse</h2>
+
+            <div class="flex flex-col text-left">
+                <label class="text-gray-700 font-semibold mb-1">{{openDetail.name}}</label>
+                <label class="text-gray-700 mb-1">Monto minimo del fondo: {{openDetail.amount}}</label>
+
+                <!--Visual para agregar el monto a invertir-->
+                <label class="text-gray-700 font-semibold mb-1">Monto a invertir</label>
+                <div class="relative">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
+                        COP $
+                    </span>
+                    <input type="number"
+                        [(ngModel)]="amount"
+                        class="w-full pl-16 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="0" />
+                </div>
+            </div>
+
+        <!-- Visual de notificacion-->
+            <div class="flex flex-col text-left mt-4">
+            <p class="text-gray-800 font-semibold mb-2">Notificación por:</p>
+
+            <div class="flex gap-6">
+
+                <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" class="w-4 h-4 text-blue-600 border-gray-300 rounded">
+                    <span class="text-gray-700">Email</span>
+                </label>
+
+                <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" class="w-4 h-4 text-blue-600 border-gray-300 rounded">
+                    <span class="text-gray-700">SMS</span>
+                </label>
+
+            </div>
+        </div>
+
+        <div *ngIf="errorMessage" class="mt-2 bg-red-100 text-red-700 text-sm p-2 rounded mb-3">
+        {{ errorMessage }}
+        </div>
+
+            <button class="bg-[#5C6BC0] text-white px-6 py-2 rounded-lg hover:bg-[#3f51b5] transition mt-4" (click)="subscribe(openDetail)"> Confirmar
+                suscripción </button>
+        </div>
+
+        
+
+    </div>
+</div>
