@@ -71,5 +71,5 @@ For more information on using the Angular CLI, including detailed command refere
 - Node 20 (para compilar npm)
 
 ## Cómo ejecutar
-npm install
-ng serve
+- npm install
+- ng serve
